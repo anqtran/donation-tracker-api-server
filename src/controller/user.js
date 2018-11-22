@@ -9,7 +9,7 @@ export default({ config, db }) => {
   let api = Router();
 
   // '/v1/user/add' - Create
-  api.post('/add', authenticate, (req, res) => {
+  api.post('/add', (req, res) => {
     let newUser = new User();
     newUser.name = req.body.name;
     newUser.email = req.body.email;
