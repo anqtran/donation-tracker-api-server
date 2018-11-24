@@ -6,6 +6,7 @@ import user from '../controller/user';
 import account from '../controller/account';
 import channel from '../controller/channel';
 import message from '../controller/message';
+import item from '../controller/item';
 
 let router = express();
 
@@ -20,6 +21,7 @@ initalizeDb(db => {
   router.use('/account', account({ config, db }));
   router.use('/channel', channel({ config, db }));
   router.use('/message', message({ config, db }));
+  router.use('/item', item({ config, db }));
 });
 
 export default router;
