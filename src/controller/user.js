@@ -24,7 +24,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/user/' - Read
-  api.get('/', authenticate, (req, res) => {
+  api.get('/', (req, res) => {
     User.find({}, (err, users) => {
       if (err) {
         res.status(500).json({ message: err });
@@ -34,7 +34,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/user/:id' - Read 1
-  api.get('/:id', authenticate, (req, res) => {
+  api.get('/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
       if (err) {
         res.status(500).json({ message: err });
@@ -44,7 +44,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/user/:id' - Update
-  api.put('/:id', authenticate, (req, res) => {
+  api.put('/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
       if (err) {
         res.status(500).json({ message: err });
@@ -61,7 +61,7 @@ export default({ config, db }) => {
   });
 
   // 'v1/user/byEmail/:email'
-  api.get('/byEmail/:email', authenticate, (req, res) => {
+  api.get('/byEmail/:email', (req, res) => {
     User
       .findOne({ 'email': req.params.email })
       .exec((err, userData) => {
@@ -73,7 +73,7 @@ export default({ config, db }) => {
   });
 
   // '/vq/user/:id' -Delete
-  api.delete('/:id', authenticate, (req, res) => {
+  api.delete('/:id', (req, res) => {
     User.remove({
       _id: req.params.id
     }, (err, user) => {
@@ -85,7 +85,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/user/' - Delete all
-  api.delete('/', authenticate, (req, res) => {
+  api.delete('/', (req, res) => {
     User.find({}, (err, users) => {
       if (err) {
         res.status(500).json({ message: err });
