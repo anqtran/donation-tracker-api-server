@@ -26,10 +26,10 @@ export default({ config, db }) => {
   });
 
 
-  // '/v1/item/byLocation/:locationName'
-  api.get('/byLocation/:locationName', (req, res) => {
+  // '/v1/item/byLocation/'
+  api.get('/byLocation/', (req, res) => {
     Item
-      .find({ 'location' : req.params.locationName }, (err, messages) => {
+      .find({ 'locationName' : req.body.locationName }, (err, messages) => {
         if(err) {
           res.status(500).json({ message: err });
         }
