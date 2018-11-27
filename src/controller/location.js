@@ -29,5 +29,15 @@ export default({ config, db }) => {
     });
   });
 
+	 // '/v1/location/' - Read
+  api.get('/', (req, res) => {
+    Location.find({}, (err, locations) => {
+      if (err) {
+        res.status(500).json({ message: err });
+      }
+      res.status(200).json(locations);
+    });
+  });
+
 	return api;
 }

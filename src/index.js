@@ -5,6 +5,7 @@ import passport from 'passport';
 import socket from 'socket.io';
 import Message from './model/message';
 import Channel from './model/channel';
+import Location from './model/location';
 
 const LocalStrategy  = require('passport-local').Strategy;
 
