@@ -10,20 +10,34 @@ export default({ config, db }) => {
 
   // '/v1/item/add' - Create
   api.post('/add', (req, res) => {
-    let newItem = new Item();
-    newItem.category = req.body.category;
-    newItem.description = req.body.description;
-    newItem.location = req.body.location;
-    newItem.longDescription = req.body.longDescription;
-    newItem.value = req.body.value;
+    let newItem = new Item(req.body);
 
     newItem.save(err => {
       if (err) {
         res.status(500).json({ message: err });
       }
+      newItem.on('es-indexed', function() {
+        console.log('document indexed');
+      });
       res.status(200).json({ item: 'item saved successfully' })
     });
   });
+
+// '/v1/item/add' - Create
+api.post('/search', function(req, res) {
+  Item.search({
+          "match": {
+            "description": {
+              "query": req.body.query,
+              "fuzziness": 2
+            }
+          }
+        }, function(err, result) {
+          console.log('res:', result.hits.hits);
+          res.send(result.hits.hits);
+        });
+});
+
 
 
   // '/v1/item/byLocation'
