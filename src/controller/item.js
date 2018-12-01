@@ -23,13 +23,13 @@ export default({ config, db }) => {
     });
   });
 
-// '/v1/item/add' - Create
+// '/v1/item/search' - Create
 api.post('/search', function(req, res) {
   Item.search({
           "match": {
             "description": {
               "query": req.body.query,
-              "fuzziness": 2
+              "fuzziness": "2.0"
             }
           }
         }, function(err, result) {
