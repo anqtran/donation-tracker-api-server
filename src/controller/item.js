@@ -50,6 +50,18 @@ api.post('/search', function(req, res) {
         res.status(200).json(messages);
       });
   });
+    // '/v1/item/byCategory'
+  api.post('/byCategory', (req, res) => {
+    Item
+      .find({ 'location' : req.body.location,
+              'category' : req.body.category
+            }, (err, messages) => {
+        if(err) {
+          res.status(500).json({ message: err });
+        }
+        res.status(200).json(messages);
+      });
+  });
 
   return api;
 }
